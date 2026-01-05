@@ -23,15 +23,28 @@ function Leaderboard() {
       .catch(err => console.error('Error fetching leaderboards:', err));
   }, []);
   return (
-    <div className="container mt-4">
-      <h2>Leaderboard</h2>
-      <ul className="list-group">
-        {leaderboards.map((l, i) => (
-          <li key={l.id || i} className="list-group-item">
-            {JSON.stringify(l)}
-          </li>
-        ))}
-      </ul>
+    <div className="card shadow p-4 mt-4">
+      <h2 className="card-title mb-3">Leaderboard</h2>
+      <div className="table-responsive">
+        <table className="table table-striped table-bordered">
+          <thead className="table-dark">
+            <tr>
+              <th>#</th>
+              <th>Team</th>
+              <th>Total Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboards.map((l, i) => (
+              <tr key={l.id || i}>
+                <td>{i + 1}</td>
+                <td>{l.team?.name || l.team || '-'}</td>
+                <td>{l.total_score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
